@@ -1,0 +1,23 @@
+{
+  "name": "jasmyle",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Jasmyle Properties - complete real-estate platform: rentals, sales, short stays, projects, assets, services",
+  "main": "server.js",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning supervisor.js",
+    "server": "node --disable-warning=ExperimentalWarning server.js",
+    "setup": "node --disable-warning=ExperimentalWarning scripts/setup.js",
+    "demo-data": "node --disable-warning=ExperimentalWarning scripts/seed-demo.js",
+    "test": "node --disable-warning=ExperimentalWarning test/smoke.js",
+    "selftest": "node --disable-warning=ExperimentalWarning scripts/selftest.js",
+    "test:unit": "node --disable-warning=ExperimentalWarning test/unit.js",
+    "test:ui": "node --disable-warning=ExperimentalWarning test/ui.js",
+    "test:all": "npm run test:unit && npm test && npm run test:ui"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,48 @@
+{
+  "version": "2026.10.1",
+  "issuedAt": "2026-10-01",
+  "notes": "Built-in rules shipped with Jasmyle Properties: Kenyan rental income tax (MRI), VAT, non-resident rental tax, and the web addresses of Safaricom Daraja, PayPal and KRA eTIMS. Rates can change by law - check KRA and update under Admin > Integrations & tax rules.",
+  "tax": {
+    "mri": {
+      "rate": 0.075,
+      "annualMin": 288000,
+      "annualMax": 15000000,
+      "dueDay": 20,
+      "penaltyPct": 0.05,
+      "penaltyMinIndividual": 2000,
+      "penaltyMinCompany": 20000,
+      "interestMonthly": 0.01,
+      "pendingChange": ""
+    },
+    "vat": {
+      "standardRate": 0.16,
+      "registrationThreshold": 5000000
+    },
+    "nonResidentRental": {
+      "rate": 0.3,
+      "dueDay": 20
+    }
+  },
+  "integrations": {
+    "mpesa": {
+      "sandbox": "https://sandbox.safaricom.co.ke",
+      "production": "https://api.safaricom.co.ke",
+      "tokenPath": "/oauth/v1/generate?grant_type=client_credentials",
+      "stkPath": "/mpesa/stkpush/v1/processrequest",
+      "stkQueryPath": "/mpesa/stkpushquery/v1/query"
+    },
+    "paypal": {
+      "sandbox": "https://api-m.sandbox.paypal.com",
+      "live": "https://api-m.paypal.com"
+    },
+    "etims": {
+      "sandbox": "https://etims-api-sbx.kra.go.ke/etims-api",
+      "production": "https://etims-api.kra.go.ke/etims-api",
+      "paths": {
+        "init": "/selectInitOsdcInfo",
+        "sales": "/saveTrnsSalesOsdc"
+      },
+      "verified": false
+    }
+  }
+}

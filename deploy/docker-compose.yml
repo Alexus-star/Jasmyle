@@ -1,0 +1,20 @@
+# Runs Jasmyle Properties + Caddy (automatic free HTTPS certificates) on one cloud server.
+#   1. Point your domain name (A record) to the server's public IP.
+#   2. Create .env next to this file:  DOMAIN=rent.yourdomain.co.ke
+#   3. First time only:  docker compose run --rm app node --disable-warning=ExperimentalWarning scripts/setup.js
+#   4. docker compose up -d        (restart: unless-stopped brings it back after reboots and power loss)
+# Both containers share the host network so the app sees real visitor IPs from Caddy (127.0.0.1).
+services:
+  app:
+    build: { context: .., dockerfile: deploy/Dockerfile }
+    network_mode: host
+    restart: unless-stopped
+    environment: { NH_PUBLIC_URL: "https://${DOMAIN}", NH_PORT: "8080", NH_HOST: "127.0.0.1" }
+    volumes: [ "jasmyle-data:/data" ]
+  caddy:
+    image: caddy:2
+    network_mode: host
+    restart: unless-stopped
+    environment: { DOMAIN: "${DOMAIN}" }
+    volumes: [ "./Caddyfile:/etc/caddy/Caddyfile:ro", "caddy-data:/data" ]
+volumes: { jasmyle-data: {}, caddy-data: {} }
